@@ -11,10 +11,12 @@ export const formikProps = {
     terms: Yup.boolean()
       .required("Required")
       .oneOf([true], "You must agree our terms and condition"),
-    sectors: Yup.array().of(Yup.string()).min(1, "At least one item must be selected.")
-  }),
+    sectors: Yup.array()
+      .of(Yup.string())
+      .min(1, "At least one item must be selected.")
+  })
 
-  onSubmit: (value) => {
-    alert(JSON.stringify(value, null, 2));
-  }
+  // onSubmit: (value) => {
+  //   alert(JSON.stringify(value, null, 2));
+  // }
 };

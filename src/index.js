@@ -1,60 +1,57 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
+import { QueryClient, QueryClientProvider } from "react-query";
+
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
 
-import { Form, Formik } from "formik";
-import { formikProps } from "./formikProps.js";
-import TextInput from "./FormConponents/TextInput";
-import MySelectInput from "./FormConponents/MySelectInput";
-import MyTerms from "./FormConponents/MyTerms.js";
+import { Toaster } from "react-hot-toast";
+
+import MyForm from "./MyForm.js";
+import SectorsCard from "./SectorsCard";
+import SectorEditModal from "./SectorEditModal.js";
+
+const queryClient = new QueryClient();
 
 function App() {
+  const [refetchQuery, setRefetchQuery] = React.useState(false);
+
+  const [open, setOpen] = React.useState(false);
+  const [modalId, setModalId] = React.useState("");
+  const handleOpen = (id) => {
+    setOpen(true);
+    setModalId(id);
+  };
+  const handleClose = () => setOpen(false);
+
   return (
-    <Container maxWidth="md">
-      <Typography
-        variant="body1"
-        component="p"
-        style={{ marginBottom: "2rem" }}
-      >
-        Please enter your name and pick the Sectors you are currently involved
-        in.
-      </Typography>
+    <>
+      <QueryClientProvider client={queryClient}>
+        <Container maxWidth="md">
+          <Typography
+            variant="body1"
+            component="p"
+            style={{ marginBottom: "2rem" }}
+          >
+            Please enter your name and pick the Sectors you are currently
+            involved in.
+          </Typography>
 
-      <Formik {...formikProps}>
-        <Form
-          as="Form"
-          style={{ display: "flex", flexDirection: "column", gap: 32 }}
-        >
-          {/* Name */}
-          <TextInput
-            id="outlined-required"
-            label="Name"
-            variant="outlined"
-            name="name"
-          />
+          <MyForm setRefetchQuery={setRefetchQuery} />
 
-          {/* Sectors */}
-          <MySelectInput
-            labelId="sectors-labelId"
-            id="sectors"
-            label="Sectors"
-            name="sectors"
-          />
+          <SectorsCard refetchQuery={refetchQuery} handleOpen={handleOpen} />
+        </Container>
 
-          {/* Terms */}
-          <MyTerms label="I accepted terms and comditions" name="terms" />
-
-          <Box>
-            <Button type="submit" variant="contained" size="large">
-              Submit
-            </Button>
-          </Box>
-        </Form>
-      </Formik>
-    </Container>
+        <SectorEditModal
+          modalId={modalId}
+          open={open}
+          handleClose={handleClose}
+          setRefetchQuery={setRefetchQuery}
+        />
+      </QueryClientProvider>
+      <Toaster />
+    </>
   );
 }
 

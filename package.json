@@ -1,6 +1,6 @@
 {
   "name": "test-hk-1-1",
-  "version": "0.0.83",
+  "version": "0.0.219",
   "description": null,
   "keywords": [],
   "homepage": "https://codesandbox.io/s/4j7m47vlm4",
@@ -13,6 +13,8 @@
     "formik": "2.2.9",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hot-toast": "2.4.0",
+    "react-query": "3.39.2",
     "yup": "0.32.11"
   },
   "devDependencies": {

@@ -12,6 +12,7 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputError from "./InputError";
 import { ListSubheader } from "@material-ui/core";
 
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -42,6 +43,7 @@ const MySelectInput = ({ label, labelId, ...props }) => {
           )}
           MenuProps={MenuProps}
           >
+            
             <ListSubheader>Manufacturing</ListSubheader>
             <MenuItem value="Construction materials">Construction materials</MenuItem>
             <MenuItem value="Electronics and Optics">Electronics and Optics</MenuItem>
